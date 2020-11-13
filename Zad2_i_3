@@ -1,0 +1,121 @@
+package zadanie2;
+
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class KatalonTest {
+    private WebDriver driver;
+
+    @Before
+    public void setUp() {
+        // Uruchom nowy egzemplarz przeglądarki Chrome
+        System.setProperty("webdriver.chrome.driver",
+                "src/main/resources/drivers/chromedriver.exe");
+        driver = new ChromeDriver();
+
+        // Zmaksymalizuj okno przeglądarki
+        driver.manage().window().maximize();
+        // Przejdź do Google
+        driver.get("https://katalon-test.s3.amazonaws.com/demo-aut/dist/html/form.html");
+    }
+    @Test
+    public void fillFormTest() {
+        WebElement firstNameImput = driver.findElement(By.id("first-name"));
+        if (firstNameImput.isDisplayed()) {
+            firstNameImput.sendKeys("Karol");
+            WebElement firstNameLabel = driver.findElement(By.xpath("//*[@id=\"infoForm\"]/div[1]/label"));
+            System.out.println(firstNameLabel.getText() + ": " + "Karol");
+        } else {
+            Assert.fail(" kto to zepsul");
+        }
+
+
+        WebElement lastNameImput = driver.findElement(By.id("last-name"));
+        if (lastNameImput.isDisplayed()) {
+            lastNameImput.sendKeys("Kowalski");
+            WebElement lastNameLabel = driver.findElement(By.xpath("//*[@id=\"infoForm\"]/div[2]/label"));
+            System.out.println(lastNameLabel.getText() + ": " + "Kowalski");
+        } else {
+            Assert.fail("kto to ");
+        }
+
+
+        WebElement maleRadioButton = driver.findElement(By.xpath("//*[@id=\"infoForm\"]/div[3]/div/div/label[1]/input"));
+        if (maleRadioButton.isDisplayed()) {
+            maleRadioButton.click();
+            WebElement maleRadioName = driver.findElement(By.xpath("//*[@id=\"infoForm\"]/div[3]/label"));
+            System.out.println(maleRadioName.getText() + ": " + "Male");
+        } else {
+            Assert.fail("kto to ");
+        }
+
+
+        WebElement formControl = driver.findElement(By.id("dob"));
+        if (formControl.isDisplayed()) {
+            formControl.sendKeys("05/22/2010");
+            WebElement formControlLabel = driver.findElement(By.xpath("//*[@id=\"infoForm\"]/div[4]/label"));
+            System.out.println(formControlLabel.getText() + ": " + "05/22/2010");
+        } else {
+            Assert.fail(" kto to ");
+        }
+
+        WebElement addressImput = driver.findElement(By.id("address"));
+        if (addressImput.isDisplayed()) {
+            addressImput.sendKeys("Prosta 51");
+            WebElement adrressLabel = driver.findElement(By.xpath("//*[@id=\"infoForm\"]/div[5]/label"));
+            System.out.println(adrressLabel.getText() + ": " + "Prosta 51");
+        } else {
+            Assert.fail(" kto to ");
+        }
+
+        WebElement emailImput = driver.findElement(By.id("email"));
+        if (emailImput.isDisplayed()) {
+            emailImput.sendKeys("karol.kowalski@mailinator.com");
+            WebElement emailLabel = driver.findElement(By.xpath("//*[@id=\"infoForm\"]/div[6]/label"));
+            System.out.println(emailLabel.getText() + ": " + "karol.kowalski@mailinator.com");
+        } else {
+            Assert.fail("kto to");
+        }
+
+
+        WebElement passwordImput = driver.findElement(By.id("password"));
+        if (passwordImput.isDisplayed()) {
+            passwordImput.sendKeys("Pass123");
+            WebElement psssowrdLabel = driver.findElement(By.xpath("//*[@id=\"infoForm\"]/div[7]/label"));
+            System.out.println(psssowrdLabel.getText() + ": " + "Pass123");
+        } else {
+            Assert.fail("kto to");
+        }
+
+        WebElement companyImput = driver.findElement(By.id("company"));
+        if (companyImput.isDisplayed()) {
+            companyImput.sendKeys("Coders Lab");
+            WebElement companyLabel = driver.findElement(By.xpath("//*[@id=\"infoForm\"]/div[8]/label"));
+            System.out.println(companyLabel.getText() + ": " + "Coders Lab");
+        } else {
+            Assert.fail("kto to");
+        }
+
+        WebElement commentImput = driver.findElement(By.id("comment"));
+        if (commentImput.isDisplayed()) {
+            commentImput.sendKeys("To jest mój pierwszy automat testowy");
+            WebElement commentLabel = driver.findElement(By.xpath("//*[@id=\"infoForm\"]/div[12]/label"));
+            System.out.println(commentLabel.getText() + ": " + "To jest mój pierwszy automat testowy");
+        } else {
+            Assert.fail("kto to");
+        }
+
+    }
+
+    @After
+    public void tearDown() throws Exception {
+
+         driver.quit();}
+    }
+
